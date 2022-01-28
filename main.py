@@ -1,6 +1,8 @@
 # %% importing required libraries
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
@@ -8,7 +10,8 @@ from sklearn.metrics import accuracy_score
 # %%importing the data as a pandas dataframe
 df = pd.read_csv("heart.csv")
 
-# %%printing the first five rows of the dataframe
+# %%exploring the data
+# printing the first five rows of the dataframe
 print(df.head())
 
 # getting info about the data
@@ -19,6 +22,15 @@ print(df.describe())
 
 # checking the distribution of the target variable
 print(df['target'].value_counts())
+
+# %%finding correlation among the attributes
+plt.figure(figsize=(20,10))
+
+sns.heatmap(df.corr(), annot=True, cmap="YlGnBu")
+df.hist(figsize=(10,10), layout=(4,4))
+
+plt.show()
+
 
 # %%Spliting the data
 X = df.drop(columns='target', axis=1)
